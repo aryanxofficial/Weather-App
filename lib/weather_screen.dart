@@ -1,8 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:weather_app/additional_info.dart';
+import 'package:weather_app/secrets.dart';
+import 'hourly_forecast.dart';
+import 'package:http/http.dart' as http;
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
+
+  //app Id should be always stored in a seperate file and put in gitignore to avoid pushing to github or while deploying
+  Future getCurrentWeather() async {
+    String cityName = 'London';
+    http.get(Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&APPID=$openWeatherAPIKey'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,55 +77,100 @@ class WeatherScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
-                  HourlyForecast(),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
+                  HourlyForecast(
+                    icon: Icons.cloud,
+                    temperature: '301.7',
+                    time: '9:00',
+                  ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'ADDITIONAL INFORMATION',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AdditionalInformation(
+                  icon: Icons.water_drop,
+                  label: 'Humidity',
+                  value: '90',
+                ),
+                AdditionalInformation(
+                  icon: Icons.air,
+                  label: 'Wind Speed',
+                  value: '7.1',
+                ),
+                AdditionalInformation(
+                  icon: Icons.beach_access,
+                  label: 'Pressure',
+                  value: '5.3',
+                ),
+              ],
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class HourlyForecast extends StatelessWidget {
-  const HourlyForecast({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      child: const Card(
-        elevation: 5,
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text(
-                '09:00',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
-              ),
-              Icon(
-                Icons.cloud,
-                size: 40,
-              ),
-              Text(
-                '301.17',
-                style: TextStyle(fontSize: 12),
-              )
-            ],
-          ),
         ),
       ),
     );
